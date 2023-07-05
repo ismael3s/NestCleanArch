@@ -1,4 +1,4 @@
-import { ICustomerRepository } from 'src/domain/repositories/icustomer-repository';
+import { ICustomerRepository } from 'src/domain/repositories/ICustomerRepository';
 import { IUnitOfWork } from '../interfaces/IUnitOfWork';
 import { Customer } from 'src/domain/entities/customer';
 
