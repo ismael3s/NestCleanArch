@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
+import { Customer } from 'src/domain/entities/customer';
 import { ICustomerRepository } from 'src/domain/repositories/ICustomerRepository';
-import { Customer } from '../../nest/app.service';
 
 export class PrismaCustomerRepository implements ICustomerRepository {
   constructor(private prisma: PrismaClient) {}

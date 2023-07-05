@@ -1,4 +1,4 @@
-import { Customer } from '@prisma/client';
+import { Customer } from "../entities/customer";
 
 export interface ICustomerRepository {
   find(): Promise<Customer[]>;
