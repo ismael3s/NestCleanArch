@@ -1,23 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { PrismaCustomerRepository } from '../persistence/prisma/PrismaCustomerRepository';
 import { IUnitOfWork } from 'src/application/interfaces/IUnitOfWork';
-
+import { PrismaUserRepository } from '../persistence/prisma/repositories/PrismaCustomerRepository';
 
 @Injectable()
 export class PrismaUnitOfWork implements IUnitOfWork {
   private originalPrisma: PrismaClient;
   private prisma: PrismaClient;
-  constructor() {
+  constructor(prisma?: PrismaClient) {
     // TODO: deve ser um singleton
-    this.originalPrisma = new PrismaClient({
-      log: ['query', 'info', 'warn'],
-    });
+    this.originalPrisma =
+      prisma ??
+      new PrismaClient({
+        log: ['query', 'info', 'warn'],
+      });
     this.prisma = this.originalPrisma;
   }
 
   getRepository<T>(repository: string): T {
-    return new PrismaCustomerRepository(this.prisma) as T;
+    return new PrismaUserRepository(this.prisma) as T;
   }
 
   async transactional<T>(work: () => Promise<T>): Promise<T> {

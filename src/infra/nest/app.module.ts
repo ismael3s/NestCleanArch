@@ -6,8 +6,8 @@ import {
   UnitOfWorkModule,
 } from '../unit-of-work/unit-of-work.module';
 import { PrismaUnitOfWork } from '../unit-of-work/PrismaUnitOfWork';
-import { CreateCustomerUseCase } from 'src/application/useCases/CreateCustomerUseCase';
 import { IUnitOfWork } from 'src/application/interfaces/IUnitOfWork';
+import { CreateUserUseCase } from 'src/application/useCases/createUser/CreateUserUseCase';
 
 @Module({
   imports: [PrismaModule, UnitOfWorkModule],
@@ -19,9 +19,9 @@ import { IUnitOfWork } from 'src/application/interfaces/IUnitOfWork';
       useClass: PrismaUnitOfWork,
     },
     {
-      provide: CreateCustomerUseCase,
+      provide: CreateUserUseCase,
       useFactory: (unitOfWork: IUnitOfWork) => {
-        return new CreateCustomerUseCase(unitOfWork);
+        return new CreateUserUseCase(unitOfWork);
       },
       inject: ['UnitOfWork'],
     },
